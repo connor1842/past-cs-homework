@@ -368,7 +368,7 @@ void receiveCommand(controlConnectionFD)
  
 /*
  *
- * - Main function: accepts a connection on a loop (maximum of 1000 connections)
+ * - Main function: accepts a connection on a loop (maximum of 100 connections)
  * - Calls receive command.
  * - Closes the connection once the command has been received, processed, and executed
  *
