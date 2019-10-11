@@ -54,7 +54,7 @@ def parseArgs(arguments):
 	if len(arguments) < 5:
 		print("Error: Please enter command in the format:\n 'ftclient.py [hostname] [portnumber] [command] [dataport or download file] [data port (if download file was specified)]'")
 		return False, False, False, False, False, False
-	hostname = arguments[1] + '.engr.oregonstate.edu'
+	hostname = arguments[1]
 	serverPort = arguments[2]
 	command = arguments[3]
 	validated = True

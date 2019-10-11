@@ -68,8 +68,10 @@ void socketSetup(char *port, int numConnections, int *socketFD, int *established
 	serverAddress.sin_addr.s_addr = INADDR_ANY;
 	
 	*socketFD = socket(AF_INET, SOCK_STREAM, 0);//create socket
-	if (*socketFD < 0) printf("Error opening server socket");
-	if (bind(*socketFD, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0){
+	if (*socketFD < 0) 
+		printf("Error opening server socket");
+	if (bind(*socketFD, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0)
+	{
 		printf("Error binding to socket\n");
 		exit(1);
 	}
@@ -107,18 +109,21 @@ int socketConnect(char *port, char *hostAddr, int *socketFD, int controlConnecti
 	serverAddress.sin_family = AF_INET;
 	serverAddress.sin_port = htons(atoi(port));
 	serverHostInfo = gethostbyname(hostAddr);
-	if (serverHostInfo == NULL){
+	if (serverHostInfo == NULL)
+	{
 		sendMsg(controlConnectionFD, "No hostname sent. Couldn't establish the connection\n");		
 		return 0;
 	}
 	memcpy((char*)&serverAddress.sin_addr.s_addr, (char*)serverHostInfo->h_addr, serverHostInfo->h_length);
 	*socketFD = socket(AF_INET, SOCK_STREAM, 0);
-	if (*socketFD < 0){
+	if (*socketFD < 0)
+	{
 		sendMsg(controlConnectionFD, "Unable to setup socket. Try again\n");		
 		return 0;
 	}
 
-	if (connect(*socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0){
+	if (connect(*socketFD, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) < 0)
+	{
 		sendMsg(controlConnectionFD, "Couldn't connect on specified host. Try again\n");
 		return 0;
 	}
@@ -271,7 +276,8 @@ void processCommand(char *clientAddr, char *port, char *command, char *filename,
  * - Returns 0 otherwise.
  *
  */
-int waitForNewConnection(int controlConnectionFD){
+int waitForNewConnection(int controlConnectionFD)
+{
 	sendMsg(controlConnectionFD, "Waiting");
 	char readyStatus[6];
 	int charsRead;
